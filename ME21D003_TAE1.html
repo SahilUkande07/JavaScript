@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Registration Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <style>      
@@ -13,14 +14,13 @@ body {
     margin: 0;
      padding-bottom: 20px;
      font-family: 'Nunito', sans-serif;
-     color: white;
+     color: rgb(250, 161, 231);
      background-image: linear-gradient(270deg, #d391a9 0%, #dcc7e3 100%);
 }
-
 .wrapper{
     background-color: #0d0b0dc1;
     position: relative;
-    width:30%;
+    width:50%;
     margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
@@ -35,77 +35,6 @@ body {
 .header h2 {
        color: #fff;
     }
-
-.form {
-    margin: 0 auto;
-    max-width: 16rem;
-    overflow: auto;
-}
-.form-control {
-    margin-bottom: 10px;
-    padding-bottom: 20px;
-    position: relative;
-}
-    .form-control input {
-        border: 1px solid transparent;
-        border-bottom-color: white;
-        background-color: transparent;
-        color: white;
-        border-radius: 0;
-        font-family: inherit;
-        font-size: 14px;
-        padding: 10px;
-        width: 100%;
-    }
-
-    .form-control input:focus {
-            outline: 0;
-            border-bottom-color: #777;
-        }
-
-    .form-control.success input {
-        border-bottom-color: #65d273;
-    }
-    .form-control.error input {
-        border-bottom-color: #e74c3c;
-    }
-    .form-control i {
-        visibility: hidden;
-        position: absolute;
-        top: 40px;
-        right: 10px;
-    }
-    .form-control.success i.fa-check-circle {
-        color: #2ecc71;
-        visibility: visible;
-    }
-    .form-control.error i.fa-times-circle {
-        color: #e74c3c;
-        visibility: visible;
-    }
-    .form-control small {
-        color: #e74c3c;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        visibility: hidden;
-    }
-    .form-control.error small {
-        visibility: visible;
-    }
-.form button {
-    background-image: linear-gradient(270deg, #08AEEA 0%, #2AF598 100%);
-    border-radius: 15px;
-    color: #000;
-    font-size: 1rem;
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
-}
-.form-control button:focus {
-            outline: 0;
-            border-bottom-color: #777;
-        }
 .credit{
     text-align: center;
     color: #000;
@@ -121,72 +50,97 @@ body {
 	<div class="header">
 		<h2>Registration Form</h2>
 	</div>
-	<form id="form" class="form">
-		<div class="form-control">
-			<input type="text" placeholder="Enter name" id="name" />
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<input type="email" placeholder="Enter email" id="email" />
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<input type="password" placeholder="Password" id="password"/>
-			<small>Error message</small>
-		</div>
-		<button>Submit</button>
-	</form>
+	<form action="#" onsubmit="return validation()" class="bg-light">
+        <div class="form-group">
+            <label for="user" class="font-weight-bold"> Username: </label>
+            <input type="text" name="user" class="form-control" id="user" autocomplete="off">
+            <span id="username" class="text-danger font-weight-bold"> </span>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold"> Password: </label>
+            <input type="text" name="pass" class="form-control" id="pass" autocomplete="off">
+            <span id="passwords" class="text-danger font-weight-bold"> </span>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold"> Confirm Password: </label>
+            <input type="text" name="conpass" class="form-control" id="conpass" autocomplete="off">
+            <span id="confrmpass" class="text-danger font-weight-bold"> </span>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold"> Mobile Number: </label>
+            <input type="text" name="mobile" class="form-control" id="mobileNumber" autocomplete="off">
+            <span id="mobileno" class="text-danger font-weight-bold"> </span>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold"> Email: </label>
+            <input type="text" name="email" class="form-control" id="emails" autocomplete="off">
+            <span id="emailids" class="text-danger font-weight-bold"> </span>
+        </div>
+        <input type="submit" name="submit" value="submit" class="btn btn-success" 	autocomplete="off">
+    </form><br><br>
 </div>
 <div class="credit">Made by Sahil Ukande <br>USN:ME21D003 <br> </span> <a href="https://in.linkedin.com/in/sahil-ukande-17423222b?trk=public_profile_samename-profile">Linkedin</a></div>
-<script>
-const form = document.getElementById('form');
-const name = document.getElementById('name');
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    checkInputs();
-});
-function checkInputs() {
-    const nameValue = name.value.trim();
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
-    if (nameValue === '') {
-        setErrorFor(name, 'Please enter your name');
-    } else {
-        setSuccessFor(name);
+<script type="text/javascript">
+	
+    function validation(){
+        var user = document.getElementById('user').value;
+        var pass = document.getElementById('pass').value;
+        var confirmpass = document.getElementById('conpass').value;
+        var mobileNumber = document.getElementById('mobileNumber').value;
+        var emails = document.getElementById('emails').value;
+        if(user == ""){
+            document.getElementById('username').innerHTML =" ** Please fill the username field";
+            return false;
+        }
+        if((user.length <= 2) || (user.length > 20)) {
+            document.getElementById('username').innerHTML =" ** Username lenght must be between 2 and 20";
+            return false;	
+        }
+        if(!isNaN(user)){
+            document.getElementById('username').innerHTML =" ** only characters are allowed";
+            return false;
+        }
+        if(pass == ""){
+            document.getElementById('passwords').innerHTML =" ** Please fill the password field";
+            return false;
+        }
+        if((pass.length <= 5) || (pass.length > 20)) {
+            document.getElementById('passwords').innerHTML =" ** Passwords lenght must be between  5 and 20";
+            return false;	
+        }
+        if(pass!=confirmpass){
+            document.getElementById('confrmpass').innerHTML =" ** Password does not match the confirm password";
+            return false;
+        }
+        if(confirmpass == ""){
+            document.getElementById('confrmpass').innerHTML =" ** Please fill the confirm password field";
+            return false;
+        }
+        if(mobileNumber == ""){
+            document.getElementById('mobileno').innerHTML =" ** Please fill the mobile NUmber field";
+            return false;
+        }
+        if(isNaN(mobileNumber)){
+            document.getElementById('mobileno').innerHTML =" ** user must write digits only not characters";
+            return false;
+        }
+        if(mobileNumber.length!=10){
+            document.getElementById('mobileno').innerHTML =" ** Mobile Number must be 10 digits only";
+            return false;
+        }
+        if(emails == ""){
+            document.getElementById('emailids').innerHTML =" ** Please fill the email idx` field";
+            return false;
+        }
+        if(emails.indexOf('@') <= 0 ){
+            document.getElementById('emailids').innerHTML =" ** @ Invalid Position";
+            return false;
+        }
+        if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
+            document.getElementById('emailids').innerHTML =" ** . Invalid Position";
+            return false;
+        }
     }
-    if (emailValue === '') {
-        setErrorFor(email, 'Please enter your email');
-    } else if (!isEmail(emailValue)) {
-        setErrorFor(email, 'Email not valid');
-    } else {
-        setSuccessFor(email);
-    }
-    if (passwordValue === '') {
-        setErrorFor(password, 'Please enter password');
-    } else if (!isPassword(passwordValue)) {
-        setErrorFor(password, 'atleast one number, one uppercase, lowercase letter, and atleast 8 character');
-    }else {
-        setSuccessFor(password);
-    }
-}
-function setErrorFor(input, message) {
-    const formControl = input.parentElement;
-    const small = formControl.querySelector('small');
-    formControl.className = 'form-control error';
-    small.innerText = message;
-}
-function setSuccessFor(input) {
-    const formControl = input.parentElement;
-    formControl.className = 'form-control success';
-}
-function isEmail(email) {
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-}
-function isPassword(password){  
-    return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
-}
 </script>
 </body>
 </html>
